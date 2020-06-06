@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
-const Login = () => {
+import axiosWithAuth from "../utils/axiosWithAuth";
+import FriendsContext from "../contexts/FriendsContext";
+
+const Login = (props) => {
   const [inputValues, setInputValues] = useState({ username: "", password: "" });
+  const { setIsLoggedIn } = useContext(FriendsContext);
 
   const handleChange = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    axiosWithAuth()
+      .post("/login", inputValues)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("authFriendsToken", res.data.payload);
+        setIsLoggedIn(true);
+        props.history.push("/friends");
+      })
+      .catch((err) => {
+        // console.log(err.response);
+        console.error("login error -", err.response.data.error);
+      });
     return;
   };
+
   return (
     <div>
       Login Page
