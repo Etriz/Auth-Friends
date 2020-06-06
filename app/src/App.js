@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Route, Link, Switch, Redirect } from "react-router-dom";
 
 import FriendsContext from "./contexts/FriendsContext";
+import PrivateRoute from "./components/PrivateRoute";
 import Login from "./components/Login";
 import Friends from "./components/Friends";
 
@@ -33,7 +34,7 @@ function App() {
           <Route path="/logout">
             <Redirect to="/login" />
           </Route>
-          <Route path="/friends" component={Friends} />
+          <PrivateRoute path="/friends" component={Friends} />
         </Switch>
       </div>
     </FriendsContext.Provider>

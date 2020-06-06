@@ -5,6 +5,7 @@ import FriendsContext from "../contexts/FriendsContext";
 
 const Login = (props) => {
   const [inputValues, setInputValues] = useState({ username: "", password: "" });
+  const [error, setError] = useState("");
   const { setIsLoggedIn } = useContext(FriendsContext);
 
   const handleChange = (e) => {
@@ -24,6 +25,7 @@ const Login = (props) => {
       .catch((err) => {
         // console.log(err.response);
         console.error("login error -", err.response.data.error);
+        setError(err.response.data.error);
       });
     return;
   };
@@ -52,6 +54,9 @@ const Login = (props) => {
         </label>
         <button>Login</button>
       </form>
+      <div>
+        <h4>{error}</h4>
+      </div>
     </div>
   );
 };
