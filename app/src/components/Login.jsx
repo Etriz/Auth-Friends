@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 
 import axiosWithAuth from "../utils/axiosWithAuth";
 import FriendsContext from "../contexts/FriendsContext";
 
 const Login = (props) => {
   const [inputValues, setInputValues] = useState({ username: "", password: "" });
-  const [error, setError] = useState("");
-  const { setIsLoggedIn } = useContext(FriendsContext);
+  const { setIsLoggedIn, error, setError } = useContext(FriendsContext);
 
   const handleChange = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
@@ -54,9 +54,10 @@ const Login = (props) => {
         </label>
         <button>Login</button>
       </form>
-      <div>
-        <h4>{error}</h4>
-      </div>
+      <h5>
+        Don't have an account? <Link to="/create">Create One</Link>
+      </h5>
+      <h4>{error}</h4>
     </div>
   );
 };
