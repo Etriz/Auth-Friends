@@ -7,6 +7,11 @@ const token = "esfeyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NUIhku
 
 let nextId = 7;
 
+let users = [
+  { username: "test", password: "test" },
+  { username: "Lambda School", password: "i<3Lambd4" },
+];
+
 let friends = [
   {
     id: 1,

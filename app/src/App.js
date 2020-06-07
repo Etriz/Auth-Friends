@@ -4,13 +4,20 @@ import { Route, Link, Switch, Redirect } from "react-router-dom";
 import FriendsContext from "./contexts/FriendsContext";
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./components/Login";
+import CreateAccount from "./components/CreateAccount";
 import Friends from "./components/Friends";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState("");
+
+  const logout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("authFriendsToken");
+  };
 
   return (
-    <FriendsContext.Provider value={{ setIsLoggedIn }}>
+    <FriendsContext.Provider value={{ setIsLoggedIn, error, setError }}>
       <div className="App">
         <nav>
           <Link to="/">Home</Link>
@@ -19,7 +26,7 @@ function App() {
           ) : (
             <>
               <Link to="/friends">Friends</Link>
-              <Link to="/logout" onClick={() => setIsLoggedIn(false)}>
+              <Link to="/logout" onClick={() => logout()}>
                 Logout
               </Link>
             </>
@@ -31,6 +38,7 @@ function App() {
             Friends with Auth - Home
           </Route>
           <Route path="/login" component={Login} />
+          <Route path="/create" component={CreateAccount} />
           <Route path="/logout">
             <Redirect to="/login" />
           </Route>
