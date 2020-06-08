@@ -92,10 +92,19 @@ body {
       border-radius: 0.5rem;
       width: 45%;
       margin: 0.5rem;
-      padding: 1rem 0;
       box-shadow: 0 0.5rem 0.5rem lightgray;
       p {
         padding: 0 1rem;
+      }
+      .deleteFriend {
+        cursor: pointer;
+        border-radius: 0 0 0.5rem 0.5rem;
+        padding: 1rem 0;
+        background: lightskyblue;
+        &:hover {
+          background: red;
+          color: white;
+        }
       }
     }
   }

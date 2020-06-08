@@ -32,10 +32,20 @@ const Friends = () => {
     axiosWithAuth()
       .post("/friends", newFriend)
       .then((res) => {
-        // console.log(res);
-        setFriendsList(res);
+        // console.log("friends response", res);
+        setFriendsList(res.data);
       })
       .catch((err) => console.log(err));
+  };
+  const deleteFriend = (e) => {
+    axiosWithAuth()
+      .delete("/friends:id")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(
@@ -83,6 +93,9 @@ const Friends = () => {
                   <br />
                   {item.email}
                 </p>
+                <div className="deleteFriend" onClick={deleteFriend}>
+                  Delete
+                </div>
               </div>
             );
           })
