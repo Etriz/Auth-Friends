@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import axiosWithAuth from "../utils/axiosWithAuth";
@@ -19,6 +19,7 @@ const Login = (props) => {
       .then((res) => {
         console.log(res);
         localStorage.setItem("authFriendsToken", res.data.payload);
+        // localStorage.setItem("authFriendsLoggedIn", res.data.payload);
         setIsLoggedIn(true);
         props.history.push("/friends");
       })
@@ -29,6 +30,8 @@ const Login = (props) => {
       });
     return;
   };
+
+  useEffect(() => setError(""), [setError]);
 
   return (
     <div>

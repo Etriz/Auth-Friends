@@ -11,11 +11,11 @@ const Friends = () => {
     axiosWithAuth()
       .get("/friends")
       .then((res) => {
-        console.log("friends", res);
+        console.log("friends list", res);
         setFriendsList(res.data);
       })
       .catch((err) => {
-        // console.log(err);
+        // console.log('friends list error',err);
         setError(err.response.data.error);
       });
   };
@@ -30,19 +30,22 @@ const Friends = () => {
     axiosWithAuth()
       .post("/friends", newFriend)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setFriendsList(res);
       })
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    getData();
-  });
+  useEffect(
+    () => {
+      getData();
+    },
+    //eslint-disable-next-line
+    []
+  );
 
   return (
     <div>
-      Friends List Here
       <form onSubmit={handleSubmit}>
         Add New Friend
         <label htmlFor="name">
@@ -68,8 +71,10 @@ const Friends = () => {
       {friendsList.length !== 0 ? (
         friendsList.map((item) => {
           return (
-            <div key={item.id}>
-              <p>{item.name}</p>
+            <div key={item.id} className="card">
+              <p>
+                {item.name} {item.email}
+              </p>
             </div>
           );
         })

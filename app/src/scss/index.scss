@@ -12,3 +12,22 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+nav {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  background: lightskyblue;
+  border-bottom: 1px solid black;
+  a {
+    padding: 0.5rem;
+    text-decoration: none;
+    color: black;
+    border: 1px solid transparent;
+    &:hover,
+    &.active {
+      background: white;
+      border-right: 1px solid black;
+      border-left: 1px solid black;
+    }
+  }
+}

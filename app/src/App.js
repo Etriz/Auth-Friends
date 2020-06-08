@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route, Link, Switch, Redirect } from "react-router-dom";
+import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 
 import FriendsContext from "./contexts/FriendsContext";
 import PrivateRoute from "./components/PrivateRoute";
@@ -8,7 +8,9 @@ import CreateAccount from "./components/CreateAccount";
 import Friends from "./components/Friends";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("authFriendsToken") ? true : false
+  );
   const [error, setError] = useState("");
 
   const logout = () => {
@@ -17,18 +19,20 @@ function App() {
   };
 
   return (
-    <FriendsContext.Provider value={{ setIsLoggedIn, error, setError }}>
+    <FriendsContext.Provider value={{ isLoggedIn, setIsLoggedIn, error, setError }}>
       <div className="App">
         <nav>
-          <Link to="/">Home</Link>
+          <NavLink exact to="/">
+            Home
+          </NavLink>
           {!isLoggedIn ? (
-            <Link to="/login">Login</Link>
+            <NavLink to="/login">Login</NavLink>
           ) : (
             <>
-              <Link to="/friends">Friends</Link>
-              <Link to="/logout" onClick={() => logout()}>
+              <NavLink to="/friends">Friends</NavLink>
+              <NavLink to="/logout" onClick={() => logout()}>
                 Logout
-              </Link>
+              </NavLink>
             </>
           )}
         </nav>
