@@ -4,6 +4,7 @@ import FriendsContext from "../contexts/FriendsContext";
 
 const Friends = () => {
   const [friendsList, setFriendsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [newFriend, setNewFriend] = useState({ id: Date.now(), name: "", age: "", email: "" });
   const { error, setError } = useContext(FriendsContext);
 
@@ -13,6 +14,7 @@ const Friends = () => {
       .then((res) => {
         console.log("friends list", res);
         setFriendsList(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         // console.log('friends list error',err);
@@ -47,17 +49,17 @@ const Friends = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        Add New Friend
+        {/* <h3>Add New Friend</h3> */}
         <label htmlFor="name">
-          Name
+          <span>Name</span>
           <input type="text" id="name" name="name" value={newFriend.name} onChange={handleChange} />
         </label>
         <label htmlFor="age">
-          Age
+          <span>Age</span>
           <input type="text" id="age" name="age" value={newFriend.age} onChange={handleChange} />
         </label>
         <label htmlFor="email">
-          Email
+          <span>Email</span>
           <input
             type="email"
             id="email"
@@ -68,19 +70,26 @@ const Friends = () => {
         </label>
         <button>Add Friend</button>
       </form>
-      {friendsList.length !== 0 ? (
-        friendsList.map((item) => {
-          return (
-            <div key={item.id} className="card">
-              <p>
-                {item.name} {item.email}
-              </p>
-            </div>
-          );
-        })
-      ) : (
-        <h4>{error}</h4>
-      )}
+      {isLoading && <h3>Loading ...</h3>}
+      <div className="cardGroup">
+        {friendsList.length !== 0 ? (
+          friendsList.map((item) => {
+            return (
+              <div key={item.id} className="card">
+                <p>{item.name}</p>
+                <hr />
+                <p>
+                  {`Age: ${item.age}`}
+                  <br />
+                  {item.email}
+                </p>
+              </div>
+            );
+          })
+        ) : (
+          <h4>{error}</h4>
+        )}
+      </div>
     </div>
   );
 };

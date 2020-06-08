@@ -35,9 +35,9 @@ const Login = (props) => {
 
   return (
     <div>
-      Login Page
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">
+          Username
           <input
             type="text"
             id="username"
@@ -47,6 +47,7 @@ const Login = (props) => {
           />
         </label>
         <label htmlFor="password">
+          Password
           <input
             type="password"
             id="password"
@@ -56,10 +57,10 @@ const Login = (props) => {
           />
         </label>
         <button>Login</button>
+        <h5>
+          Don't have an account? <Link to="/create">Create One</Link>
+        </h5>
       </form>
-      <h5>
-        Don't have an account? <Link to="/create">Create One</Link>
-      </h5>
       <h4>{error}</h4>
     </div>
   );

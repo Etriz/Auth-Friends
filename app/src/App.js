@@ -39,7 +39,7 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            Friends with Auth - Home
+            <h2>Friends with Auth - Home</h2>
           </Route>
           <Route path="/login" component={Login} />
           <Route path="/create" component={CreateAccount} />

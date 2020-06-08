@@ -26,9 +26,9 @@ const CreateAccount = (props) => {
 
   return (
     <div>
-      Create Account
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">
+          Username
           <input
             type="text"
             id="username"
@@ -38,6 +38,7 @@ const CreateAccount = (props) => {
           />
         </label>
         <label htmlFor="password">
+          Password
           <input
             type="password"
             id="password"
