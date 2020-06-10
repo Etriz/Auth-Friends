@@ -37,15 +37,16 @@ const Friends = () => {
       })
       .catch((err) => console.log(err));
   };
-  const deleteFriend = (e) => {
-    axiosWithAuth()
-      .delete("/friends:id")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const deleteFriend = (id) => {
+    console.log("id", id);
+    // axiosWithAuth()
+    //   .delete(`/friends/${id}`)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   useEffect(
@@ -93,7 +94,7 @@ const Friends = () => {
                   <br />
                   {item.email}
                 </p>
-                <div className="deleteFriend" onClick={deleteFriend}>
+                <div className="deleteFriend" onClick={deleteFriend(item.id)}>
                   Delete
                 </div>
               </div>
